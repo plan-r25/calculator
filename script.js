@@ -1,42 +1,43 @@
-const container = document.querySelector("#container");
-const div = document.createElement('div');
 const calc = document.querySelector("#calc");
 const result = document.querySelector("#result");
-const operator = document.querySelector("#operator");
-const number = document.createElement('div');
-
-number.append(div)
-
-div.classList.add('buttons');
-div.appendChild(operator);
+const digit = document.querySelector(".digit")
+const operator = document.querySelector(".operator");
+const clear = document.querySelector("#clear")
+const equal = document.querySelector("#equal");
 
 for (let i = 0; i <= 9; i++) {
-  const num = document.createElement('button');
-  num.textContent = i;
-  num.classList.add('nums');
-  console.log(num);
-  div.appendChild(num);
+  const buttons = document.createElement('button');
+  buttons.textContent = i;
+  digit.appendChild(buttons)
 };
-container.appendChild(number);
 
-const buttons = document.querySelectorAll(".buttons button");
+const buttons = document.querySelectorAll(".operator button")
+
+function calculate(str) {
+  let parts = str.split(' ');
+  let a = +parts[0];
+  let op = parts[1];
+  let b = +parts[2];
+  if(op === '*') return a * b;
+  if(op === '*') return a * b;
+  if(op === '*') return a * b;
+  if(op === '*') return a * b;
+}
+
+let input = '';
 buttons.forEach(button => {
-  button.addEventListener("click", (e) => {
-    calc.textContent += e.target.textContent;
-    let parts = calc.textContent.split(/[+\-*/]/);
-    console.log('parts', parts);
-    let a = +parts[0];
-    let op = parts[1]
-    let b = +parts[2]
-    console.log('part A',a)
-    
-    console.log(e.target.textContent);
-    if (op === '*') return a * b;
-    if (op === '+') return a + b;
-    if (op === '-') return a - b;
-    if (op === '/') return a / b;
-    let input = `${a} ${op} ${b}`
-    result.textContent = input ;
-    console.log('part B', b)
-  })
+  button.addEventListener('click', () => {
+    console.log(button.textContent);
+    input += button.textContent;
+    calc.textContent = input;
+  });
+  console.log("input", input)
+});
+equal.addEventListener('click', (e) => {
+  console.log(e.target.textContent)
+  result.textContent = calculate(input);
+});
+clear.addEventListener("click", () => {
+  input = input.slice(0, -1);
+  calc.textContent = input;
 });
