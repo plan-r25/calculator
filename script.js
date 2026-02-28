@@ -40,7 +40,6 @@ dlt.addEventListener("click", () => {
 clear.addEventListener("click", () => {
   input = input.slice(0, -1);
   calc.textContent = input;
-
   updateResult();
 });
 equal.addEventListener("click", () => {
@@ -72,6 +71,7 @@ function updateResult() {
   }
   if (input.length < 3) {
     result.textContent = "";
+    calc.classList.remove("small");
     return;
   }
   // calculate
@@ -80,4 +80,26 @@ function updateResult() {
     return;
   }
   result.textContent = calculate(input);
-}
+};
+
+const keys = /[+\-*/%0-9.]/;
+//const keyWord = /^(Enter|BackSpace)$/;
+window.addEventListener("keydown", (e) => {
+    e.preventDefault();
+
+  if (keys.test(e.key)) {
+    input += e.key;
+    calc.textContent = input;
+  } 
+  if (e.key === 'Enter') {
+   result.textContent = calculate(input);
+   calc.classList.add("small");
+   result.classList.add("large");   
+   console.log("winKey", e.key);
+  }
+  if (e.key === 'Backspace') {
+    input = input.slice(0, -1);
+    calc.textContent = input;
+    updateResult();
+  }
+});
