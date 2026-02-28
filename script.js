@@ -29,7 +29,7 @@ buttons.forEach(button => {
 
     calc.classList.remove("small");
     result.classList.remove("large");
-    updateResult();
+    updateResult(); 
   })
 });
 dlt.addEventListener("click", () => {
@@ -58,7 +58,7 @@ function calculate(str) {
     if (curr === '+') return acc + nextNum;
     if (curr === '-') return acc - nextNum;
     if (curr === '%') return acc % nextNum;
-    if (curr === '/') return acc / nextNum;
+    if (curr === '/') return nextNum === 0 ? 'Cannot divide by 0' : acc / nextNum;
     return acc; 
   }, 0)
   return res;
